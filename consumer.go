@@ -27,7 +27,7 @@ func (c consumer) vip_point_pay(price float32, point float32) float32 {
 
 	price = c.point_pay(price, point)
 	if point >= 100 && c.vip_level > 0 {
-		price = (price - (point / Point_ratio)) * 0.9
+		price = price * 0.9
 	}
 
 	return price
