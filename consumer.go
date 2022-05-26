@@ -6,7 +6,8 @@ var (
 )
 
 type consumer struct {
-	vip_level int
+	vip_level       int
+	available_point float32
 }
 
 func (c consumer) normal_pay(price float32) float32 {
@@ -18,17 +19,16 @@ func (c consumer) vip_pay(price float32) float32 {
 	return price
 }
 
-func (c consumer) point_pay(price float32, point float32) float32 {
-	price = price - (point / Point_ratio)
+func (c consumer) point_pay(price float32) float32 {
+	price = price - (c.available_point / Point_ratio)
 	return price
 }
 
-func (c consumer) vip_point_pay(price float32, point float32) float32 {
-
-	price = c.point_pay(price, point)
-	if point >= 100 && c.vip_level > 0 {
-		price = price * 0.9
+func (c consumer) vip_point_pay(price float32) float32 {
+	if c.available_point >= 100 && c.vip_level > 0 {
+		price = (price - (c.available_point / Point_ratio)) * 0.9
+	} else {
+		price = c.point_pay(price)
 	}
-
 	return price
 }
