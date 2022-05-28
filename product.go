@@ -6,12 +6,20 @@ type product struct {
 	available_amount int
 }
 
-func (p product) discount(ratio float32) {
-	p.price = p.price * ratio
+func (p *product) reprice(new_price float32) {
+	(*p).price = new_price
 }
 
-func (p product) supplement(amount int) {
-	p.available_amount = p.available_amount + amount
+func (p *product) discount(ratio float32) {
+	(*p).price *= ratio
+}
+
+func (p *product) supplement(amount int) {
+	(*p).available_amount += amount
+}
+
+func (p *product) deduct(amount int) {
+	(*p).available_amount -= amount
 }
 
 /*

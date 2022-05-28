@@ -43,7 +43,18 @@ func (cash cashier) vip_point_pay(buyer *consumer, point float32, total_expenses
 func (cash cashier) count_expenses(items map[product]int) float32 {
 	var total_expenses float32 = 0
 	for item := range items {
+		if item.available_amount < items[item] {
+			return -1
+		}
 		total_expenses += item.price * float32(items[item])
+	}
+	return total_expenses
+}
+
+func (cash cashier) deduct_inventory(items *map[product]int) float32 {
+	var total_expenses float32 = 0
+	for item := range *items {
+		item.available_amount -= (*items)[item]
 	}
 	return total_expenses
 }
