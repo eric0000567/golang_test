@@ -1,34 +1,24 @@
 package main
 
-var (
-	vip_discount_grade float32 = 0.05
-	Point_ratio        float32 = 1
-)
+import "fmt"
 
 type consumer struct {
+	name            string
 	vip_level       int
+	available_coin  float32
 	available_point float32
+	shopping_cart   map[product]int
 }
 
-func (c consumer) normal_pay(price float32) float32 {
-	return price
+func (c *consumer) print_balance() {
+	fmt.Println(c.name, " vip level :", c.vip_level)
+	fmt.Println(c.name, " available coin $", c.available_coin)
+	fmt.Println(c.name, " available point", c.available_point)
+}
+func (c *consumer) add_products(item product, amount int) {
+	(*c).shopping_cart[item] += amount
 }
 
-func (c consumer) vip_pay(price float32) float32 {
-	price = price * (1 - (float32(c.vip_level) * vip_discount_grade))
-	return price
-}
-
-func (c consumer) point_pay(price float32) float32 {
-	price = price - (c.available_point / Point_ratio)
-	return price
-}
-
-func (c consumer) vip_point_pay(price float32) float32 {
-	if c.available_point >= 100 && c.vip_level > 0 {
-		price = (price - (c.available_point / Point_ratio)) * 0.9
-	} else {
-		price = c.point_pay(price)
-	}
-	return price
-}
+/*
+add func about consumer
+*/
