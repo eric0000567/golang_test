@@ -4,6 +4,7 @@ This's an easy toll system. This package is divided into consumer, project and c
 
 ## Describe
 Consumers have two payment methods: coins and points
+
 Consumers can select projects and add to shopping cart
 
 ## How to use
