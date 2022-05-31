@@ -1,6 +1,10 @@
 # golang_test
 
-This's an easy toll system. This package is divided into consumer, project and cashier
+This's an easy toll system. This package is divided into consumer, project and cashier.
+
+## Describe
+Consumers have two payment methods: coins and points
+Consumers can select projects and add to shopping cart
 
 ## How to use
 ##### 1. Create project, consumer and cashier
@@ -14,7 +18,7 @@ var cashier1  = cashier{}
 consumer1.add_products(&apple, 5)
 ```
 ##### 3. Call payment_process function and give parameter
-payment_process(consumer, point, cashier, payment_method)
 ```go
 payment_process(&consumer1, 0, cashier1, payment_method["A"])
 ```
+payment_process(consumer, point, cashier, payment_method)
